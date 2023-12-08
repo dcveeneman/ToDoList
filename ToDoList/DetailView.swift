@@ -9,7 +9,17 @@ import SwiftUI
 
 struct DetailView: View {
     var body: some View {
-        Text("Welcome to the new view!")
+        VStack {
+            Image(systemName: "swift")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(.orange)
+            Text("You Are a Swifty Legend!")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+        }
+        
+        .padding()
     }
 }
 
