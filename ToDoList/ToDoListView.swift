@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct ToDoListView: View {
-    
     var body: some View {
         NavigationStack {
-            List {
-                let seasons: [String] = ["Winter", "Spring", "Summer", "Fall"]
-                ForEach(seasons, id:  \.self) { season in
-                    NavigationLink {
-                        DetailView()
-                    } label: {
-                        Text(season)
-                    }
+            VStack {
+                NavigationLink {
+                    DetailView()
+                } label: {
+                    Image (systemName: "eye")
+                    Text ("Show the New View!")
                 }
+                .buttonStyle(.borderedProminent)
             }
         }
-    }
         .padding()
+    }
 }
+
 
 
 #Preview {
