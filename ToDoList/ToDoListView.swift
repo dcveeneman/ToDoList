@@ -23,7 +23,7 @@ struct ToDoListView: View {
                     } label: {
                         Text(toDo)
                     }
-
+                    .font(.title2)
                     
                 }
             }

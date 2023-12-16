@@ -12,21 +12,8 @@ struct DetailView: View {
     var passedValue: String
     
     var body: some View {
-        VStack {
-            Image(systemName: "swift")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.orange)
-            Text("You Are a Swifty Legend!\n\n And you just passed over the value \(passedValue)")
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
+        List {
             
-            Spacer()
-            
-            Button("Get Back") {
-                dismiss()
-            }
-            .buttonStyle(.borderedProminent)
         }
 
         .padding()
