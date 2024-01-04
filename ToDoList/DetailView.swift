@@ -9,35 +9,41 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var toDo = ""
-    @State private var reminderIsOn = false
-    @State private var dueDate = Date.now + (60*60*24)
-    @State private var notes = ""
-    @State private var isCompleted = false
-
-    var passedValue: String
+    @EnvironmentObject var toDosVM: ToDosViewModel
+    var newToDo = false
+    
+    /* We need to add an @State variable to this view to receive the ToDo
+     struct that we're going to be passing in when the parent view creates
+     a new instance of this view. The variable has to be an @State variable,
+     and it can't be a private @State variable--it has to be exposed to the
+     rest of the app, so that the parent view can pass the ToDo instance
+     to it. Note that we don't initialize the ToDo's properties in this
+     struct, because the parent view will pass in an initialized toDo
+     object. */
+    
+    @State var toDo: ToDo
     
     var body: some View {
         NavigationStack {
             List {
-                TextField("Enter To Do here", text: $toDo)
+                TextField("Enter To Do here", text: $toDo.item)
                     .font(.title)
                     .textFieldStyle(.roundedBorder)
                     .padding(.vertical)
                     .listRowSeparator(.hidden)
-                Toggle("Set Reminder:", isOn: $reminderIsOn)
+                Toggle("Set Reminder:", isOn: $toDo.reminderIsOn)
                     .padding(.top)
                     .listRowSeparator(.hidden)
-                DatePicker("Date", selection: $dueDate)
-                    .disabled(!reminderIsOn)
+                DatePicker("Date", selection: $toDo.dueDate)
+                    .disabled(!toDo.reminderIsOn)
                     .listRowSeparator(.hidden)
                     .padding(.bottom)
                 Text ("Notes:")
                     .padding(.top)
-                TextField("", text: $notes, axis: .vertical)
+                TextField("", text: $toDo.notes, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .listRowSeparator(.hidden)
-                Toggle ("Completed:", isOn: $isCompleted)
+                Toggle ("Completed:", isOn: $toDo.isCompleted)
                     .padding(.top)
                     .listRowSeparator(.hidden)
             }
@@ -60,6 +66,11 @@ struct DetailView: View {
     }
 }
 
-#Preview {
-    DetailView(passedValue: "Item 1")
+struct DetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            DetailView(toDo: ToDo())
+                .environmentObject (ToDosViewModel())
+        }
+    }
 }
