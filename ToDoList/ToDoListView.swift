@@ -37,7 +37,9 @@ struct ToDoListView: View {
                 }
             }
             .sheet(isPresented: $sheetIsPresented) {
-                DetailView(toDosVM: <#T##EnvironmentObject<ToDosViewModel>#>, newToDo: <#T##Bool#>, toDo: <#T##ToDo#>)
+                NavigationStack {
+                    DetailView(toDo: ToDo(), newToDo: true)
+                }
             }
         }
         

@@ -8,7 +8,7 @@
 import Foundation
 
 class ToDosViewModel: ObservableObject {
-    var toDos: [ToDo] = []
+    @Published var toDos: [ToDo] = []
     
     init() {
         // Temp Data here. Will eventually load in saved data

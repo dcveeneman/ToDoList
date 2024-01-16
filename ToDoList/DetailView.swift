@@ -10,18 +10,15 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var toDosVM: ToDosViewModel
+    @State var toDo: ToDo
     var newToDo = false
     
-    /* We need to add an @State variable to this view to receive the ToDo
-     struct that we're going to be passing in when the parent view creates
-     a new instance of this view. The variable has to be an @State variable,
-     and it can't be a private @State variable--it has to be exposed to the
-     rest of the app, so that the parent view can pass the ToDo instance
-     to it. Note that we don't initialize the ToDo's properties in this
-     struct, because the parent view will pass in an initialized toDo
-     object. */
-    
-    @State var toDo: ToDo
+    /* Note that we declare an @EnvironmentObject (different from an
+     @Environment variable) to receive the ViewModel from the parent 
+     view, and we create a toDo property to receive the individual 
+     ToDo object selected by the user in the parent View. The property 
+     is declared with an @State wrapper, so that the ToDo's properties
+     can be bound to the View's components.*/
     
     var body: some View {
         NavigationStack {
@@ -56,7 +53,13 @@ struct DetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
-                        // TODO: Add Save code here
+                        /* If new, append to toDoVM.toDos, else update
+                        the toDo that was passed in from the List */
+                        
+                        if newToDo {
+                            toDosVM.toDos.append (toDo)
+                            dismiss()
+                        }
                     }
                 }
             }
