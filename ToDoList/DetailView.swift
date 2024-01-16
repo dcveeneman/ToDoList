@@ -14,9 +14,9 @@ struct DetailView: View {
     var newToDo = false
     
     /* Note that we declare an @EnvironmentObject (different from an
-     @Environment variable) to receive the ViewModel from the parent 
-     view, and we create a toDo property to receive the individual 
-     ToDo object selected by the user in the parent View. The property 
+     @Environment variable) to receive the ViewModel from the parent
+     view, and we create a toDo property to receive the individual
+     ToDo object selected by the user in the parent View. The property
      is declared with an @State wrapper, so that the ToDo's properties
      can be bound to the View's components.*/
     
@@ -53,13 +53,8 @@ struct DetailView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
-                        /* If new, append to toDoVM.toDos, else update
-                        the toDo that was passed in from the List */
-                        
-                        if newToDo {
-                            toDosVM.toDos.append (toDo)
-                            dismiss()
-                        }
+                        toDosVM.saveToDo(toDo: toDo, newToDo: newToDo)
+                        dismiss()
                     }
                 }
             }
