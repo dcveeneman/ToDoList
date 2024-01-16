@@ -13,6 +13,11 @@ struct DetailView: View {
     @State var toDo: ToDo
     var newToDo = false
     
+    /* The 'dismiss' variable uses a Swift pre-defined environment key
+     (\.dismiss). The declaration associates the variable with the key
+     to perform a dismiss action. Note that the variable is called like
+     a method, with parens behind it. */
+    
     /* Note that we declare an @EnvironmentObject (different from an
      @Environment variable) to receive the ViewModel from the parent
      view, and we create a toDo property to receive the individual
